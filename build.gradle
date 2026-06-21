@@ -1,17 +1,5 @@
-plugins {
-    id "com.android.application"
-    id "kotlin-android"
-    id "dev.flutter.flutter-gradle-plugin"
-}
-android {
-    namespace "com.farouq.sales"
-    compileSdk 35
-    defaultConfig {
-        applicationId "com.farouq.sales"
-        minSdk 23
-        targetSdk 35
-        versionCode 1
-        versionName "1.0.0"
-    }
-}
-flutter { source "../.." }
+allprojects { repositories { google(); mavenCentral() } }
+rootProject.buildDir = "../build"
+subprojects { project.buildDir = "${rootProject.buildDir}/${project.name}" }
+subprojects { project.evaluationDependsOn(":app") }
+tasks.register("clean", Delete) { delete rootProject.buildDir }
